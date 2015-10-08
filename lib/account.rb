@@ -34,7 +34,7 @@ module Bank
 		end
 
 		def deposit(deposit_amount)
-			@balance += @balance
+			@balance += deposit_amount
 			puts "Your updated balance is: #{@balance}."
 		end
 

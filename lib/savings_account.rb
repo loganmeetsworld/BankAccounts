@@ -7,18 +7,21 @@ module Bank
 
 		def withdraw(withdraw_amount)
 			transaction_fee = 200
+			puts "Your balance was #{@balance}."
 
 			if @balance - withdraw_amount <= @min_balance
-				puts "Don't drop below 10 dollars."
+				puts "Don't drop below 10 dollars w/ transaction fee."
+				puts "Your balance is still #{@balance}."
 			else
 				super
 				@balance -= transaction_fee
-				puts "Your updated balance is #{@balance}." 
+				puts "Your transaction fee was #{transaction_fee}"
+				puts "Your updated balance is #{@balance}."  
 			end
 		end
 
 		def add_interest(rate)
-			interest = @balance * rate/100
+			interest = @balance * rate.to_f/100
 			@balance += interest
 
 			puts "The return from interest is #{interest}."

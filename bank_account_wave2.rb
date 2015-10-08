@@ -3,10 +3,11 @@ require 'money'
 module Bank
 	require 'csv'
 
-	attr_accessor :balance
-
 	class Account
-		def initialize(account_id, balance, date_opened, owner = nil)
+
+		attr_accessor :balance, :account_id
+
+		def initialize(account_id, balance, date_opened)
 			@account_id = account_id
 
 			if balance < 0 
@@ -15,27 +16,6 @@ module Bank
 
 			@balance = balance
 			@date_opened = DateTime.strptime(date_opened, "%Y-%m-%d %H:%M:%S %z")
-			@owner = owner
-		end
-
-		def self.all 
-			account_csv = CSV.read("./support/accounts.csv")
-		
-			account_csv.each do |row|
-				Account.new(row[0], row[1].to_i, row[2])
-			end
-		end
-
-		def self.find(id)
-
-			match_id = Bank::Account.all.find do |line| 
-				line[0].to_i == id
-			end
-
-			puts match_id
-
-			# match_account = Account.new(match_id[0].to_i, match_id[1].to_i, match_id[2])
-			# puts match_account
 		end
 
 		def withdraw(withdraw_amount)
@@ -64,6 +44,24 @@ module Bank
 			# Return the updated account balance.  
 		end
 
+		def self.all 
+			account_csv = CSV.read("./support/accounts.csv")
+			account_instances = []
+
+			account_csv.each do |row|
+				account_instances << Account.new(row[0], row[1].to_i, row[2])
+			end
+			return account_instances
+		end
+
+		def self.find(id)
+			self.all.find do |line|
+				line.account_id.to_i == id
+			end
+
+			# match_account = Account.new(match_id[0].to_i, match_id[1].to_i, match_id[2])
+			# puts match_account
+		end
 	end
 
 	class Owner
@@ -83,17 +81,18 @@ module Bank
 		def self.all 
 			owner_csv = CSV.read("./support/owners.csv")
 
+			owners_array = []
+
 			owner_csv.each do |row|
 				owner_hash = {:identifier => row[0], :last_name => row[1], :first_name => row[2], :street => row[3], :city => row[4], :state => row[5]}
-				owners_array = Owner.new(owner_hash)
-				puts owners_array
+				owners_array.push(Owner.new(owner_hash))
 			end
-			
+			return owners_array
 		end
 
 		def self.find(id)
-			owner_match_id = Bank::Owner.all.find do |line|
-				line[0].to_i == id
+			self.all.find do |line|
+				line.identifier.to_i == id
 			end
 		end
 

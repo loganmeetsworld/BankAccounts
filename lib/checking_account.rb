@@ -23,17 +23,20 @@ module Bank
 
 		def withdraw_using_check(amount)
 			amount = amount.to_i
+			transaction_fee = 100
 
 			if @count_checks <= 2
 				if @balance >= -1000
 					@count_checks += 1
 					@balance -= amount.abs
+					@balance -= transaction_fee
 					puts "Your current balance: #{@balance}."
 				else
 					puts "Not enough money in this account. You have to have at least 10 dollars."
 					puts "The current balance is #{@balance}. Please put in a different amount."
 				end
 			else
+				@balance -= transaction_fee
 				puts "You already withdrew 3 checks this month!"
 			end
 		end

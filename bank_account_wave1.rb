@@ -56,7 +56,7 @@ module Bank
 
 		def self.find(id)
 			self.all.find do |line|
-				line.id.to_i == id
+				line.account_id.to_i == id
 			end
 
 			# match_account = Account.new(match_id[0].to_i, match_id[1].to_i, match_id[2])
@@ -92,7 +92,7 @@ module Bank
 
 		def self.find(id)
 			self.all.find do |line|
-				line.id.to_i == id
+				line.identifier.to_i == id
 			end
 		end
 

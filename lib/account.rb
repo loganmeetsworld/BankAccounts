@@ -9,8 +9,8 @@ module Bank
 			@account_id = account_id
 			@balance = balance.to_i
 			check_balance
-			@min_balance = 0.to_i
-			@date_opened = date_opened
+			@min_balance = nil
+			@date_opened = DateTime.strptime(date_opened, "%Y-%m-%d %H:%M:%S %s")
 
 			puts "The balance is #{@balance}."
 		end

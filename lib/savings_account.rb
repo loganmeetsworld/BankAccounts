@@ -1,8 +1,8 @@
 module Bank
 	class SavingsAccount < Account 
 		def initialize(account_id, balance, date_opened)
-			@min_balance = 1000
 			super
+			@min_balance = 1000
 		end
 
 		def withdraw(withdraw_amount)

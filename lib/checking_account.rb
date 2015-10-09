@@ -1,9 +1,9 @@
 module Bank 
 	class CheckingAccount < Account 
 		def initialize(account_id, balance, date_opened)
-			@min_balance = 0
-			@count_checks = 0 
 			super
+			@min_balance = 0
+			@count_checks = 0
 		end
 
 		def withdraw(withdraw_amount)

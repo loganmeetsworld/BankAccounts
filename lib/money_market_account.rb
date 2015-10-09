@@ -6,7 +6,6 @@ module Bank
 			super
 			@min_balance = 10_000
 			@transaction_count = 0
-			@date_opened = date_opened
 		end
 
 		def withdraw(withdraw_amount)	
@@ -52,6 +51,6 @@ module Bank
 			puts "The return from interest is #{interest}."
 			puts "The new balance is #{@balance}."
 		end
-		
+
 	end
 end

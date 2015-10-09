@@ -45,6 +45,10 @@ module Bank
 			@count_checks = 0 
 			puts "Your checks are zero again!"
 		end
+
+		def add_interest(rate)
+			return "Not a function of checking accounts."
+		end
 		
 	end
 end

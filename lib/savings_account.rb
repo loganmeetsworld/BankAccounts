@@ -19,18 +19,5 @@ module Bank
 				puts "Your updated balance is #{@balance}."  
 			end
 		end
-
-		def deposit
-			super
-		end
-
-		def add_interest(rate)
-			interest = @balance * rate.to_f/100
-			@balance += interest
-
-			puts "The return from interest is #{interest}."
-			puts "The new balance is #{@balance}."
-		end
-
 	end
 end

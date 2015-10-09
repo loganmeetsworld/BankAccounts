@@ -44,13 +44,5 @@ module Bank
 			puts "Your transactions are zero again!"
 		end
 
-		def add_interest(rate)
-			interest = @balance * rate.to_f/100
-			@balance += interest
-
-			puts "The return from interest is #{interest}."
-			puts "The new balance is #{@balance}."
-		end
-
 	end
 end

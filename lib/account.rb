@@ -3,14 +3,14 @@ require 'csv'
 module Bank
 	class Account
 
-		attr_accessor :balance, :account_id
+		attr_accessor :balance, :account_id, :date_opened
 
 		def initialize(account_id, balance, date_opened)
 			@account_id = account_id
 			@balance = balance.to_i
 			check_balance
 			@min_balance = nil
-			@date_opened = DateTime.strptime(date_opened, "%Y-%m-%d %H:%M:%S %s")
+			@date_opened = DateTime.strptime(date_opened, "%Y-%m-%d %H:%M:%S %z")
 
 			puts "The balance is #{@balance}."
 		end
@@ -61,6 +61,6 @@ module Bank
 			puts "The return from interest is #{interest}."
 			puts "The new balance is #{@balance}."
 		end
-		
+
 	end
 end

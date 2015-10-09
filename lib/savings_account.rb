@@ -20,6 +20,10 @@ module Bank
 			end
 		end
 
+		def deposit
+			super
+		end
+
 		def add_interest(rate)
 			interest = @balance * rate.to_f/100
 			@balance += interest

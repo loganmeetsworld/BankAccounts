@@ -1,20 +1,34 @@
 module Bank 
 	class MoneyMarketAccount < Account 
+		attr_accessor :transaction_count
+
 		def initialize(account_id, balance, date_opened)
+			super
 			@min_balance = 10_000
 			@transaction_count = 0
-			super
+			@date_opened = date_opened
 		end
-		def withdraw(withdraw_amount)
-			if @transaction_count < 6
+
+		def withdraw(withdraw_amount)	
+			if (@balance - withdraw_amount) <= min_balance && @transaction_count < 6
 				super
+				transaction_fee = 100
+				@balance -= transaction_fee
+				puts "A fee of 100 dollars has been imposed because you dropped below the minimum."
+				puts "Your balance is #{@balance}."
 				@transaction_count += 1
-			else
+			elsif @transaction_count >= 6
 				puts "No more transactions are allowed this month."
+			puts "Your balance is #{@balance}."
+			else
+				super
+				puts "Your balance is #{@balance}."
+				@transaction_count += 1
+			end
 		end
 
 		def deposit(deposit_amount)
-			if deposit_amount < 10_000
+			if @balance >= @min_balance
 				if @transaction_count < 6
 					super
 					@transaction_count += 1
@@ -26,6 +40,18 @@ module Bank
 			end
 		end
 
+		def reset_transactions
+			@transaction_count = 0
+			puts "Your transactions are zero again!"
+		end
 
+		def add_interest(rate)
+			interest = @balance * rate.to_f/100
+			@balance += interest
+
+			puts "The return from interest is #{interest}."
+			puts "The new balance is #{@balance}."
+		end
+		
 	end
 end
